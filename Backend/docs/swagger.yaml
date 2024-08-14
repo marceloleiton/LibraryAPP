@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Mi API
+  version: 1.0.0
+  description: Documentación de la API de mi aplicación.
+servers:
+  - url: http://localhost:3000
+    description: Servidor de desarrollo
+paths:
+  /sign-up:
+    post:
+      summary: Registra un nuevo usuario.
+      description: Crea un nuevo usuario en la base de datos si no existe un usuario con el mismo nombre de usuario o correo electrónico.
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: El nombre de usuario del nuevo usuario.
+                email:
+                  type: string
+                  description: El correo electrónico del nuevo usuario.
+                password:
+                  type: string
+                  description: La contraseña del nuevo usuario.
+                address:
+                  type: string
+                  description: La dirección del nuevo usuario.
+              example:
+                username: "john_doe"
+                email: "john.doe@example.com"
+                password: "securePassword123"
+                address: "123 Main St, Springfield"
+      responses:
+        200:
+          description: Usuario creado correctamente.
+        400:
+          description: Error de solicitud, el nombre de usuario o el correo electrónico ya están en uso o los datos proporcionados son inválidos.
+        500:
+          description: Error del servidor.
